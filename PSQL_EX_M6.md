@@ -181,3 +181,18 @@ DETAIL:  Key (student_id)=(3) is still referenced from table "projects".
 
 
 
+## Modify records
+
+**Adding 2 extra collumns with timestamps**
+
+```sql
+ALTER TABLE STUDENTS ADD COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE STUDENTS ADD COLUMN updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+OR
+
+ALTER TABLE projects
+ADD COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+```
+
