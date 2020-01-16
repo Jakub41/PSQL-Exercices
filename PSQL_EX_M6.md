@@ -20,6 +20,21 @@ CREATE TABLE Students (
 );
 ```
 
+#### Student table with UUID 
+
+https://www.postgresqltutorial.com/postgresql-uuid/
+
+```sql
+CREATE TABLE Students (
+    _id uuid DEFAULT uuid_generate_v4 (),
+    first_name VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    email VARCHAR(20) NOT NULL,
+		date_of_birth DATE NOT NULL,
+    PRIMARY KEY (_id)
+);
+```
+
 
 
 #### Projects table with FOREIGN KEY student_id
@@ -84,6 +99,43 @@ VALUES
 		( SELECT student_id FROM students WHERE student_id = 5 ) 
 	)
 ```
+
+
+
+#### Insert to projects table with foreign key as UUID
+
+```sql
+INSERT INTO projects ( "name", description, creation_date, repourl, liveurl, student_id )
+VALUES
+	( 'My SQL', 'A project', '2019-12-12', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '40d37376-562d-45c1-a199-85918cd547b4' ) 
+	),
+	( 'PSQL', 'A project', '2019-05-06', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '40d37376-562d-45c1-a199-85918cd547b4' ) 
+	),
+	( 'Anything', 'A project', '2018-12-02', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '0f88fcba-1c52-4fdf-9008-e1d5ec87ad0c' ) 
+	),
+	( 'PHP', 'A project', '2017-10-25', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '0f88fcba-1c52-4fdf-9008-e1d5ec87ad0c' ) 
+	),
+	( 'NODE', 'A project', '2019-02-20', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '0f88fcba-1c52-4fdf-9008-e1d5ec87ad0c' ) 
+	),
+	( 'Boostrap', 'A project', '2019-08-03', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '39cdf634-eb1b-4378-a988-c18022450674' ) 
+	),
+	( 'Ruby', 'A project', '2018-09-27', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '40f75fa4-ed6a-4295-86f8-2b47d3cb5ef8' ) 
+	),
+	( 'SHH', 'A project', '2019-02-20', 'GitHub', 'www', 
+		( SELECT _id FROM students WHERE _id = '40f75fa4-ed6a-4295-86f8-2b47d3cb5ef8' ) 
+	)
+```
+
+
+
+
 
 ## Update records
 
