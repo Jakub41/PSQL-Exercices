@@ -52,6 +52,23 @@ CREATE TABLE projects (
 )
 ```
 
+#### Projects table V2
+
+```sql
+CREATE TABLE projects (
+	project_id uuid DEFAULT uuid_generate_v4 ( ) PRIMARY KEY,
+	student_id uuid NOT NULL,
+	FOREIGN KEY ( student_id ) REFERENCES students ( _id ) ON DELETE RESTRICT,
+	"name" VARCHAR ( 50 ) UNIQUE NOT NULL,
+	description VARCHAR ( 200 ) NULL,
+	creation_date DATE NOT NULL,
+	repourl TEXT NULL,
+	liveurl TEXT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT NOW( ),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW( ) 
+)
+```
+
 
 
 ## Inserting records
@@ -98,6 +115,14 @@ VALUES
 	( 'SHH', 'A project', '12/12/2019', 'GitHub', 'www', 
 		( SELECT student_id FROM students WHERE student_id = 5 ) 
 	)
+```
+
+**Note** => The above inserted records uses date as a text. 
+To use the `DATE` as format `yyyy-mm-dd` we add as follow into the 2 tables:
+
+```SQL
+- dateOfBirth DATE NOT NULL
+- creation_date DATE NOT NULL,
 ```
 
 
